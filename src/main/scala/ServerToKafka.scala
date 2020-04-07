@@ -4,8 +4,9 @@ import commons.Helper._
 import zio.console._
 import modules.scrapModule._
 import modules.kafkaProducerModule._
-import scrap._
-object Server extends App {
+
+import scrap.scrapOperation.ScrapComercio
+object ServerToKafka extends App {
   val appRunTime: EnvironmentType = Runtime.unsafeFromLayer(liveEnvironments, platform).environment
   val services: ZIO[EnvironmentType, Throwable, Unit] =
     for {

@@ -1,21 +1,20 @@
+import org.openqa.selenium.PageLoadStrategy
+import org.openqa.selenium.chrome.ChromeOptions
+import org.openqa.selenium.chrome.ChromeDriver
+
 import net.ruippeixotog.scalascraper.browser.JsoupBrowser
-import net.ruippeixotog.scalascraper.dsl.DSL._
-import net.ruippeixotog.scalascraper.dsl.DSL.Extract._
-import net.ruippeixotog.scalascraper.model._
+
 object TestingScrap {
   def main(args: Array[String]): Unit = {
-    val baseUrl = "https://elcomercio.pe"
+    val baseUrl = "https://kambista.com/"
     val browser = JsoupBrowser()
-    val doc     = browser.get(s"$baseUrl/noticias/coronavirus/")
+    val doc     = browser.get(baseUrl)
     println(doc)
-    /*    val storyItemList = doc >> elements(".story-item")
-    val storyItemContentTitle =
-      storyItemList.map(
-        _ >> element(".story-item__content-title") >> element("a") >> (attr("href"), text("a"))
-      )
-    val mapped = storyItemContentTitle.map {
-      case (url, summary) => (baseUrl + url, summary)
-    }.toMap
-    mapped.keys.foreach(println(_))*/
+
+    val chromeOptions = new ChromeOptions()
+    chromeOptions.setPageLoadStrategy(PageLoadStrategy.NORMAL)
+    chromeOptions.setHeadless(true)
+    val driver = new ChromeDriver(chromeOptions)
+    println(driver)
   }
 }
